@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -25,8 +26,19 @@ namespace AoC2024_Exo02
             }
 
             // PART ONE
+            /*foreach (Report report in reports)
+            {
+                if (report.IsSafe())
+                    safeReportsCount++;
+            }
+
+            Console.WriteLine(safeReportsCount);*/
+
+            // PART TWO
             foreach (Report report in reports)
             {
+                report.CleanFirstError();
+
                 if (report.IsSafe())
                     safeReportsCount++;
             }
@@ -38,6 +50,42 @@ namespace AoC2024_Exo02
     public class Report
     {
         public List<int> levels = new List<int>();
+
+        public void CleanFirstError()
+        {
+            Assert.IsTrue(levels.Count > 1, $"Not enough levels");
+
+            if (IsIncreasing(levels[0], levels[1]) && IsDifferenceInRange(levels[0], levels[1]))
+            {
+                for (int i = 1; i < levels.Count - 1; i++)
+                {
+                    if (!IsIncreasing(levels[i], levels[i + 1]) || !IsDifferenceInRange(levels[i], levels[i + 1]))
+                    {
+                        Console.WriteLine($"{levels[i]} and {levels[i + 1]} are not increasing");
+                        levels.RemoveAt(i);
+                        return;
+                    }
+                }
+            }
+            else if (IsDecreasing(levels[0], levels[1]) && IsDifferenceInRange(levels[0], levels[1]))
+            {
+                for (int i = 1; i < levels.Count - 1; i++)
+                {
+                    if (!IsDecreasing(levels[i], levels[i + 1]) || !IsDifferenceInRange(levels[i], levels[i + 1]))
+                    {
+                        Console.WriteLine($"{levels[i]} and {levels[i + 1]} are not decreasing");
+                        levels.RemoveAt(i);
+                        return;
+                    }
+                }
+            }
+            else if (levels[0] == levels[1])
+            {
+                Console.WriteLine($"{levels[0]} and {levels[1]} are equal");
+                levels.RemoveAt(0);
+                return;
+            }
+        }
 
         public bool IsSafe()
         {
