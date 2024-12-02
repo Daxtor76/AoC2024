@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace AoC2024_Exo01
 {
-    public class Program
+    public class Exo01
     {
-        public static void Main()
+        public void Launch()
         {
             string text = Utils.ReadFile("E:\\Projets\\AdventOfCode\\AoC2024\\Exo2024_01.txt");
             string[] textSplitted = text.Split(Environment.NewLine);
