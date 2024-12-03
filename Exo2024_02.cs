@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace AoC2024_Exo02
+namespace AoC2024
 {
     public class Exo02
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-namespace AoC2024_Exo01
+namespace AoC2024
 {
     public class Exo01
     {

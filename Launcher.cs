@@ -1,4 +1,4 @@
-﻿using AoC2024_Exo02;
+﻿using AoC2024;
 
 namespace AoC2024
 {
@@ -6,7 +6,7 @@ namespace AoC2024
     {
         public static void Main()
         {
-            Exo02 exo = new Exo02();
+            Exo03 exo = new Exo03();
             exo.Launch();
         }
     }
