@@ -12,14 +12,25 @@ namespace AoC2024
         {
             string text = Utils.ReadFile("C:\\Formation\\AoC2024\\Exo2024_03.txt");
             string[] textSplitted = UseRegex(text).ToArray();
+            int result = 0;
 
-            // trouver: mul(x,y)
+            // mul(XXX,YYY)
 
             // PART ONE
             foreach (string s in textSplitted)
             {
-                Console.WriteLine(s);
+                result += GetExpressionResult(s);
             }
+            Console.WriteLine(result);
+        }
+
+        public int GetExpressionResult(string expression)
+        {
+            string[] splittedExpression = expression.Split(['(', ',', ')']);
+            int a = Int32.Parse(splittedExpression[1]);
+            int b = Int32.Parse(splittedExpression[2]);
+
+            return a * b;
         }
 
         public List<string> UseRegex(string input)
