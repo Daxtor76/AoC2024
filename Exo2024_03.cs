@@ -11,15 +11,38 @@ namespace AoC2024
         public void Launch()
         {
             string text = Utils.ReadFile("C:\\Formation\\AoC2024\\Exo2024_03.txt");
-            string[] textSplitted = UseRegex(text).ToArray();
             int result = 0;
 
             // mul(XXX,YYY)
 
             // PART ONE
+            /*string[] textSplitted = FindMuls(text).ToArray();
             foreach (string s in textSplitted)
             {
                 result += GetExpressionResult(s);
+            }
+            Console.WriteLine(result);*/
+
+            // PART TWO
+            string[] textSplitted = FindInstructions(text).ToArray();
+            bool canGetValue = true;
+            foreach (string s in textSplitted)
+            {
+                switch(s)
+                {
+                    case "do()":
+                        canGetValue = true;
+                        break;
+                    case "don't()":
+                        canGetValue = false;
+                        break;
+                    default:
+                        if (canGetValue)
+                            result += GetExpressionResult(s);
+                        else
+                            break;
+                        break;
+                }
             }
             Console.WriteLine(result);
         }
@@ -33,7 +56,19 @@ namespace AoC2024
             return a * b;
         }
 
-        public List<string> UseRegex(string input)
+        public List<string> FindInstructions(string input)
+        {
+            List<string> result = new List<string>();
+            Regex regex = new Regex("don't\\(\\)|mul\\([0-9]+,[0-9]+\\)|do\\(\\)", RegexOptions.IgnoreCase);
+            MatchCollection matches = regex.Matches(input);
+
+            foreach(Match match in matches)
+                result.Add(match.Value);
+
+            return result;
+        }
+
+        public List<string> FindMuls(string input)
         {
             List<string> result = new List<string>();
             Regex regex = new Regex("mul\\([0-9]+,[0-9]+\\)", RegexOptions.IgnoreCase);
