@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
+using System.Security.Permissions;
 using System.Text.RegularExpressions;
 
 namespace AoC2024
@@ -44,7 +45,7 @@ namespace AoC2024
                 new Vector2(1, 1)
             };
 
-            if (grid[origin] == 'X')
+            if (grid[origin] == searchedString[0])
             {
                 foreach (Vector2 direction in directionsToCheck)
                 {
