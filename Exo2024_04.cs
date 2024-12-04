@@ -20,15 +20,59 @@ namespace AoC2024
             string[] textSplitted = text.Split(Environment.NewLine);
             grid = CreateGrid(textSplitted);
 
-            // pour chaque X, parcourir dans toutes les directions sur distance de 4
-            // stop si pas de correspondance à XMAS
-
-            foreach (Vector2 pos in grid.Keys)
+            // P1
+            /*foreach (Vector2 pos in grid.Keys)
             {
                 CheckAllDirectionFromPosition(pos, "XMAS");
             }
 
+            Console.WriteLine(xmasCount);*/
+
+            // P2
+            foreach (Vector2 pos in grid.Keys)
+            {
+                CheckDiagonalsFromPosition(pos);
+            }
+
             Console.WriteLine(xmasCount);
+        }
+
+        private void CheckDiagonalsFromPosition(Vector2 origin)
+        {
+            List<Vector2> directionsToCheck = new List<Vector2>()
+            {
+                new Vector2(1, 1),
+                new Vector2(-1, 1)
+            };
+
+            if (grid[origin] == 'A')
+            {
+                foreach (Vector2 direction in directionsToCheck)
+                {
+                    Vector2 posToCheck = origin + direction;
+                    Vector2 oppositPos = origin - direction;
+
+                    if (grid.ContainsKey(posToCheck) && grid.ContainsKey(oppositPos))
+                    {
+                        if (GetCharInPosition(posToCheck) == 'M')
+                        {
+                            if (GetCharInPosition(oppositPos) != 'S')
+                                return;
+                        }
+                        else if (GetCharInPosition(posToCheck) == 'S')
+                        {
+                            if (GetCharInPosition(oppositPos) != 'M')
+                                return;
+                        }
+                        else
+                            return;
+                    }
+                    else
+                        return;
+                }
+
+                xmasCount++;
+            }
         }
 
         private void CheckAllDirectionFromPosition(Vector2 origin, string searchedString)
