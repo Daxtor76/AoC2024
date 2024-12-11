@@ -6,7 +6,7 @@ namespace AoC2024
     {
         public static void Main()
         {
-            Exo05 exo = new Exo05();
+            Exo06 exo = new Exo06();
             exo.Launch();
         }
     }
