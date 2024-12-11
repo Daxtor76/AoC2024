@@ -35,6 +35,20 @@ namespace AoC2024
             }
         }
 
+        public bool CompareLists(List<int> a, List<int> b)
+        {
+            if (a.Count != b.Count)
+                return false;
+
+            for (int i = 0; i < a.Count; i++)
+            {
+                if (a[i] != b[i])
+                    return false;
+            }
+
+            return true;
+        }
+
         public string[] GetTmpRules(string[] text)
         {
             List<string> tmp = new List<string>();
